@@ -3194,6 +3194,53 @@ router.get('/maker/special/epep', async (req, res, next) => {
     res.sendFile(error)
       }
 })
+router.get('/toattp', async (req, res, next) => {
+        var url = req.query.url,
+             apikeyInput = req.query.apikey;
+        
+	if(!apikeyInput) return res.json(loghandler.notparam)
+	if(apikeyInput !== `${key}`) return res.sendFile(invalidKey)
+        if (!url) return res.json(loghandler.noturl)
+	if (!url.startsWith('http')) return res.json(loghandler.invalidLink)
+
+try {
+   axios.get(`https://ezgif.com/gif-to-webp?url=${url}`).then(({ data }) => {
+           var $ = cheerio.load(data)
+           var bodyFormThen = new FormData()
+           var file = $('input[name="file"]').attr('value')
+	   var token = $('input[name="token"]').attr('value')
+           var convert = $('input[name="file"]').attr('value')
+           var gotdata = {
+                         file: file,
+                         token: token,
+                         convert: convert
+                         }
+                         bodyFormThen.append('file', gotdata.file)
+                         bodyFormThen.append('token', gotdata.token)
+                         bodyFormThen.append('convert', gotdata.convert)
+                         axios({
+                         method: 'post',
+                         url: 'https://ezgif.com/gif-to-webp/' + gotdata.file,
+                         data: bodyFormThen,
+                         headers: {
+                         'Content-Type': `multipart/form-data; boundary=${bodyFormThen._boundary}`
+                         }}).then(({ data }) => {
+                         var $ = cheerio.load(data)
+                         var result = 'https:' + $('div#output > p.outfile > video > source').attr('src')
+
+	                       res.json({
+                                            status : true,
+                                            creator : `${creator}`,
+                                            result : result
+                                        })
+                             })
+                     })
+
+ } catch (e) {
+          console.log(e);
+      res.sendFile(error)
+   }
+})
 
 router.get('/tomp4', async (req, res, next) => {
         var url = req.query.url,
