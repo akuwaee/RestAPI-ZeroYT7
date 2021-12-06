@@ -3195,9 +3195,7 @@ router.get('/maker/special/epep', async (req, res, next) => {
       }
 })
 router.get('/toattp', async (req, res, next) => {
-        var url = req.query.url,
-          
-	
+        var url = req.query.url;
 try {
    axios.get(`https://ezgif.com/gif-to-webp?url=${url}`).then(({ data }) => {
            var $ = cheerio.load(data)
