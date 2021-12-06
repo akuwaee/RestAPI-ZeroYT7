@@ -3200,7 +3200,6 @@ router.get('/toattp', async (req, res, next) => {
         
 	if(!apikeyInput) return res.json(loghandler.notparam)
 	if(apikeyInput !== `${key}`) return res.sendFile(invalidKey)
-        if (!url) return res.json(loghandler.noturl)
 	
 try {
    axios.get(`https://ezgif.com/gif-to-webp?url=${url}`).then(({ data }) => {
