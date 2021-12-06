@@ -3196,10 +3196,7 @@ router.get('/maker/special/epep', async (req, res, next) => {
 })
 router.get('/toattp', async (req, res, next) => {
         var url = req.query.url,
-             apikeyInput = req.query.apikey;
-        
-	if(!apikeyInput) return res.json(loghandler.notparam)
-	if(apikeyInput !== `${key}`) return res.sendFile(invalidKey)
+          
 	
 try {
    axios.get(`https://ezgif.com/gif-to-webp?url=${url}`).then(({ data }) => {
