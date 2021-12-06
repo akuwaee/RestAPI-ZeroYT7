@@ -3226,7 +3226,7 @@ try {
                          'Content-Type': `multipart/form-data; boundary=${bodyFormThen._boundary}`
                          }}).then(({ data }) => {
                          var $ = cheerio.load(data)
-                         var result = 'https:' + $('div#output > p.outfile > video > source').attr('src')
+                         var result = 'https:' + $('div#output > p.outfile > img > source').attr('src')
 
 	                       res.json({
                                             status : true,
