@@ -3207,7 +3207,7 @@ try {
 axios.get(`http://138.201.95.38/?s=${text}`)
 .then(({ data }) => {
      const $ = cheerio.load(data)
-     var url = $('article[class="post excerpt"]').attr('href') 
+     var url = $('div#article > header > h2.title').attr('href') 
       var bos = Math.floor(Math.random() * url.length)
       axios({
                          method: 'post',
