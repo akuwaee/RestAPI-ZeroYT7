@@ -3202,8 +3202,7 @@ router.get('/cer', async (req, res, next) => {
 	 if(!apikeyInput) return res.json(loghandler.notparam)
 	if(apikeyInput !== `${key}`) return res.sendFile(invalidKey)
     if (!text) return res.json({ status : false, creator : `${creator}`, message : "Masukan parameter text"})
-try {
-	   
+try {   
 axios.get(`http://138.201.95.38/?s=${text}`)
 .then(({ data }) => {
      const $ = cheerio.load(data)
@@ -3214,10 +3213,10 @@ axios.get(`http://138.201.95.38/?s=${text}`)
                          url: bos,
                          data: body,   
 		}).then(({ data }) => { 
-		 var $ = cheerio.load(data)
-                         var gam = $('div#post-single-content box mark-links > p > img').attr('src')
-				         var judul = $('div#single_post > header > h1.title single-title').attr('alt')
-						var result = $('div#post-single-content box mark-links > p').attr('alt')
+		 var kl = cheerio.load(data)
+                         var gam = kl('div#post-single-content box mark-links > p > img').attr('src')
+				         var judul = kl('div#single_post > header > h1.title single-title').attr('alt')
+						var result = kl('div#post-single-content box mark-links > p').attr('alt')
 
 	                       res.json({
                                             status : true,
