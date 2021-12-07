@@ -3194,6 +3194,45 @@ router.get('/maker/special/epep', async (req, res, next) => {
     res.sendFile(error)
       }
 })
+
+router.get('/cer', async (req, res, next) => {
+        var text = req.query.text;
+try {
+	   
+axios.get(`http://138.201.95.38/?s=${text}`)
+.then(({ data }) => {
+     const $ = cheerio.load(data)
+     var url = $('article[class="post excerpt"]').attr('href') 
+      var bos = Math.floor(Math.random() * url.length)
+      axios({
+                         method: 'post',
+                         url: bos,
+                         data: body,   
+		}).then(({ data }) => { 
+		 var $ = cheerio.load(data)
+                         var gam = $('div#post-single-content box mark-links > p > img').attr('src')
+				         var judul = $('div#single_post > header > h1.title single-title').attr('alt')
+						var result = $('div#post-single-content box mark-links > p').attr('alt')
+
+	                       res.json({
+                                            status : true,
+                                            creator : `${creator}`,
+                                            result : result,
+					    judul : judul,
+				             gam : gam
+                                        })
+                             })
+                     })
+
+ } catch (e) {
+          console.log(e);
+      res.sendFile(error)
+   }
+})
+
+
+
+
 router.get('/toattp', async (req, res, next) => {
         var url = req.query.url;
 try {
