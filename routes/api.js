@@ -439,7 +439,7 @@ router.get('/short/tiny', async (req, res, next) => {
     
           text = req.query.text
 	    if (!text) return res.json(loghandler.nottext)
-     request(`https://tinyurl.com/api-create.php?url=${query}`, function (error, response, body) {
+     request(`https://tinyurl.com/api-create.php?url=${text}`, function (error, response, body) {
          try {
              res.json({
                  status : true,
