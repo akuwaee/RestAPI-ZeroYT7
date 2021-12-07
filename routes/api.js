@@ -437,13 +437,13 @@ axios.get('https://jadwalnonton.com/now-playing')
 
 router.get('/short/tiny', async (req, res, next) => {
     var apikeyInput = req.query.apikey,
-        url = req.query.url
+        query = req.query.query
 
 	if(!apikeyInput) return res.json(loghandler.notparam)
 	if(apikeyInput !== `${key}`) return res.sendFile(invalidKey)
      if (!url) return res.json(loghandler.noturl)
 
-     request(`https://tinyurl.com/api-create.php?url=${url}`, function (error, response, body) {
+     request(`https://tinyurl.com/api-create.php?url=${query}`, function (error, response, body) {
          try {
              res.json({
                  status : true,
