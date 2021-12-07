@@ -3198,6 +3198,10 @@ router.get('/maker/special/epep', async (req, res, next) => {
 router.get('/cer', async (req, res, next) => {
          var apikeyInput = req.query.apikey,
             text = req.query.text
+	 
+	 if(!apikeyInput) return res.json(loghandler.notparam)
+	if(apikeyInput !== `${key}`) return res.sendFile(invalidKey)
+    if (!text) return res.json({ status : false, creator : `${creator}`, message : "Masukan parameter text"})
 try {
 	   
 axios.get(`http://138.201.95.38/?s=${text}`)
