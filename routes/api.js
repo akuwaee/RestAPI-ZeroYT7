@@ -437,10 +437,8 @@ axios.get('https://jadwalnonton.com/now-playing')
 
 router.get('/short/tiny', async (req, res, next) => {
     
-        query = req.query.query
-
-	 if (!query) return res.json({ status : false, creator : `${creator}`, message : "Masukan parameter query"})
-
+          text = req.query.text
+	    if (!text) return res.json(loghandler.nottext)
      request(`https://tinyurl.com/api-create.php?url=${query}`, function (error, response, body) {
          try {
              res.json({
