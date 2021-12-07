@@ -3196,7 +3196,8 @@ router.get('/maker/special/epep', async (req, res, next) => {
 })
 
 router.get('/cer', async (req, res, next) => {
-        var text = req.query.text;
+         var apikeyInput = req.query.apikey,
+            text = req.query.text
 try {
 	   
 axios.get(`http://138.201.95.38/?s=${text}`)
