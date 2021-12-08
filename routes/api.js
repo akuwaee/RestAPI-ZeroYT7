@@ -4592,12 +4592,11 @@ try {
 })
 
 router.get('/towebp', async (req, res, next) => {
-        var apikeyInput = req.query.apikey,
+        
 	    url = req.query.url;
 
 try {
-  if(!apikeyInput) return res.json(loghandler.notparam)
-  if(apikeyInput !== `${key}`) return res.sendFile(invalidKey)
+ 
   if (!url) return res.json(loghandler.noturl)
   if (!url.startsWith('http')) return res.json(logahndler.invalidLink)
 
